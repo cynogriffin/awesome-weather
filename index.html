@@ -5,19 +5,91 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Awesome Weather</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <header>
+    <header class="container">
         <h1>Awesome Weather</h1>
         <p>Search for a city to view weather information</p>
     </header>
 
-    <main>
-        <div>
-            <form>
+    <nav class="container">
+        <div class="row align-items-center py-2">
+          <div class="input-group col-sm">
+            <span class="input-group-text" id="basic-addon1">Lat</span>
+            <input
+              type="text"
+              class="form-control"
+              inputmode="numeric"
+              id="latitude"
+              placeholder="latitude"
+              aria-label="latitude"
+              aria-describedby="basic-addon1"
+              value="47.6062"
+            />
+          </div>
+          <div class="input-group col-sm">
+            <span class="input-group-text" id="basic-addon1">Lon</span>
+            <input
+              type="text"
+              class="form-control"
+              inputmode="numeric"
+              id="longitude"
+              placeholder="longitude"
+              aria-label="longitude"
+              aria-describedby="basic-addon1"
+              value="-122.3321"
+            />
+          </div>
+        </div>
+        <div class="row align-items-center py-2">
+          <div class="col-auto me-auto">
+            <button id="btnGet" type="button" class="btn btn-primary mb-3">
+              Get Weather
+            </button>
+            <button id="btnCurrent" type="button" class="btn btn-primary mb-3">
+              Use Current Location
+            </button>
+          </div>
+        </div>
+      </nav>
+      <main class="container">
+        <h2>Weather</h2>
+        <!-- results for weather data -->
+        <div class="weather row gx-2">
+          <div class="col">
+            <div class="card" style="width: 30vw">
+              <h5 class="card-title p-2">Date</h5>
+              <img
+                src="http://openweathermap.org/img/wn/10d@4x.png"
+                class="card-img-top"
+                alt="Weather description"
+              />
+              <div class="card-body">
+                <h3 class="card-title">Weather Label</h3>
+                <p class="card-text">High Temp Low Temp</p>
+                <p class="card-text">HighFeels like</p>
+                <p class="card-text">Pressure</p>
+                <p class="card-text">Humidty</p>
+                <p class="card-text">UV Index</p>
+                <p class="card-text">Precipitation</p>
+                <p class="card-text">Dew Point</p>
+                <p class="card-text">Wind speed and direction</p>
+                <p class="card-text">Sunrise</p>
+                <p class="card-text">Sunset</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+    <!-- <main class="container">
+        <div class="input row align-items-center py-2">
+            <form class="input-group col-sm">
                 <label for="city">Search for a City:</label>
-                <input type="text" name="city" id="city" autofocus="true" />
-                <button type="submit">Search</button>
+                <input type="text" class="input-value form-control" name="city" id="city" autofocus="true" placeholder="Enter a City" />
+                <button type="submit" class="btn btn-primary" id="btnGet">Search</button>
             </form>
         </div>
         
@@ -25,16 +97,35 @@
 
         </div>
 
-        <div id="city-stats">
-
-        </div>
+        <div id="city-stats" class="weather row gx-2">
+            <div class="col">
+                <div class="card" style="width: 30vw">
+                    <h5 class="card-title p-2">Date</h5>
+                    <img 
+                        src="http://openweathermap.org/img/wn/10d@4x.png"
+                        class="card-imp-top" 
+                        alt="Weather description" 
+                    />
+                    <div class="card-body">
+                        <h3 class="card-title">Weather Label</h3>
+                        <p class="temp card-text"></p>
+                        <p class="wind card-text"></p>
+                        <p class="humidity card-text"></p>
+                        <p class="uvi card-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
 
         <div id="forecast">
             <h2>5-Day Forecast:</h2>
             <div id="days">
-                
+
             </div>
         </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
