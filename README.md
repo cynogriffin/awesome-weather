@@ -1,4 +1,4 @@
-# awesome-weather
+# Awesome Weather
 
 ## Description
 
