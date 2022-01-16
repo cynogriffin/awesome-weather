@@ -14,7 +14,7 @@ const app = {
       let key = "285cbfb92b81ac13c5344b946dbf3505";
       let lang = 'en';
       let units = 'imperial';
-      let url = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&units=${units}&lang=${lang}`;
+      let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&units=${units}&lang=${lang}`;
       //fetch the weather
       fetch(url)
         .then((resp) => {
@@ -61,7 +61,7 @@ const app = {
                     <div class="card">
                     <h5 class="card-title p-2">${dt.toDateString()}</h5>
                     <img
-                        src="http://openweathermap.org/img/wn/${
+                        src="https://openweathermap.org/img/wn/${
                         day.weather[0].icon
                         }@4x.png"
                         class="card-img-top"
