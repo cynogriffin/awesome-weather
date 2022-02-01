@@ -1,4 +1,5 @@
 const app = {
+    // event listeners for the buttons
     init: () => {
       document
         .getElementById('btnGet')
@@ -7,6 +8,7 @@ const app = {
         .getElementById('btnCurrent')
         .addEventListener('click', app.getLocation);
     },
+    // sends request to the API
     fetchWeather: (ev) => {
       //use the values from latitude and longitude to fetch the weather
       let lat = document.getElementById('latitude').value;
@@ -26,37 +28,42 @@ const app = {
         })
         .catch(console.err);
     },
+    // gets user position from the DOM on their computer
     getLocation: (ev) => {
       let opts = {
         enableHighAccuracy: true,
         timeout: 1000 * 10, //10 seconds
         maximumAge: 1000 * 60 * 5, //5 minutes
       };
-      navigator.geolocation.getCurrentPosition(app.ftw, app.wtf, opts);
+      navigator.geolocation.getCurrentPosition(app.positionSuccess, app.error, opts);
     },
-    ftw: (position) => {
+    // if user position is found, enters the values in the search areas
+    positionSuccess: (position) => {
       //got position
       document.getElementById('latitude').value =
         position.coords.latitude.toFixed(2);
       document.getElementById('longitude').value =
         position.coords.longitude.toFixed(2);
     },
-    wtf: (err) => {
+    // error if it was not able to retrieve users current location
+    error: (err) => {
       //geolocation failed
       console.error(err);
     },
+    // shows the 5-day forecast with successful response from API given location
     showWeather: (resp) => {
         console.log(resp);
         let row = document.querySelector('.weather.row');
         //clear out the old weather and add the new
         // row.innerHTML = '';
         row.innerHTML = resp.daily
-            .map((day, idx) => {
+          // creates a cards with API response
+          .map((day, idx) => {
+            // gets a forecast for next five days
             if (idx <= 4) {
+                // gets the date
                 let dt = new Date(day.dt * 1000); //timestamp * 1000
-                let sr = new Date(day.sunrise * 1000).toTimeString();
-                let ss = new Date(day.sunset * 1000).toTimeString();
-                
+                // create the weather cards
                 return `<div class="col">
                     <div class="card">
                     <h5 class="card-title p-2">${dt.toDateString()}</h5>
@@ -67,32 +74,24 @@ const app = {
                         class="card-img-top"
                         alt="${day.weather[0].description}"
                     />
-                    <div class="card-body">
+                      <div class="card-body">
                         <h3 class="card-title">${day.weather[0].main}</h3>
                         <p class="card-text">High ${day.temp.max}&deg;F Low ${
-                day.temp.min
-                }&deg;F</p>
-                        <p class="card-text">High Feels like ${
-                        day.feels_like.day
-                        }&deg;F</p>
-                        <p class="card-text">Pressure ${day.pressure}mb</p>
+                          day.temp.min
+                          }&deg;F</p>
                         <p class="card-text">Humidity ${day.humidity}%</p>
                         <p class="card-text uvcolor">UV Index ${day.uvi}</p>
                         <p class="card-text">Precipitation ${day.pop * 100}%</p>
-                        <p class="card-text">Dewpoint ${day.dew_point}</p>
                         <p class="card-text">Wind ${day.wind_speed}m/s, ${
-                day.wind_deg
-                }&deg;</p>
-                        <p class="card-text">Sunrise ${sr}</p>
-                        <p class="card-text">Sunset ${ss}</p>
+                          day.wind_deg
+                          }&deg;</p>
+                      </div>
                     </div>
-                    </div>
-                </div>
                 </div>`;
             }
-        })
-        .join(' ');
-
+          })
+          .join(' ');
+        // color codes the UV index levels
         resp.daily.map((day, idx) => {
             if (idx <= 4) {
                 if(day.uvi <= 2){
@@ -108,9 +107,8 @@ const app = {
 
 };
   
-
-
-  app.init();
+// starts the app on page load
+app.init();
 
 // var init= function() {
 //     document
